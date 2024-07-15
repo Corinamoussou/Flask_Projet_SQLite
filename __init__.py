@@ -62,6 +62,25 @@ def ReadBDD():
 def formulaire_client():
     return render_template('formulaire.html')  # afficher le formulaire
 
+# Nouvelle route pour afficher le formulaire de recherche par nom
+@app.route('/fiche_nom/', methods=['GET'])
+def recherche_nom():
+    return render_template('recherche_nom.html')  # Afficher le formulaire de recherche
+
+# Nouvelle route pour traiter la recherche par nom
+@app.route('/fiche_nom/', methods=['POST'])
+def resultat_recherche_nom():
+    nom_recherche = request.form['nom']
+    
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom_recherche,))
+    data = cursor.fetchall()
+    conn.close()
+    
+    return render_template('resultat_recherche.html', data=data)
+
+
 @app.route('/enregistrer_client', methods=['POST'])
 def enregistrer_client():
     nom = request.form['nom']

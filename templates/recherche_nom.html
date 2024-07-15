@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <title>Recherche par Nom</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h2>Recherche d'un client par nom</h2>
+    <form method="POST" action="{{ url_for('resultat_recherche_nom') }}">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" required>
+        <input type="submit" value="Rechercher">
+    </form>
+</body>
+</html>
+
